@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ProtectedRoute from "./routes/ProtectedRoute";
+import StudentDashboard from "./pages/student/Dashboard";
+import LandlordDashboard from "./pages/landlord/Dashboard";
+import AdminDashboard from "./pages/admin/Dashboard";
+import Login from "./pages/Login";
+import Unauthorized from "./pages/Unauthorized";
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        {/* Public Routes */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/unauthorized" element={<Unauthorized />} />
+
+        {/* Student Routes */}
+        <Route element={<ProtectedRoute allowedRoles={["student"]} />}>
+          <Route path="/student/dashboard" element={<StudentDashboard />} />
+        </Route>
+
+        {/* Landlord Routes */}
+        <Route element={<ProtectedRoute allowedRoles={["landlord"]} />}>
+          <Route path="/landlord/dashboard" element={<LandlordDashboard />} />
+        </Route>
+
+        {/* Admin Routes */}
+        <Route element={<ProtectedRoute allowedRoles={["admin"]} />}>
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        </Route>
+      </Routes>
+    </Router>
   );
 }
-
-export default App;
