@@ -1,10 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./routes/ProtectedRoute";
-import StudentDashboard from "./pages/student/Dashboard";
-import LandlordDashboard from "./pages/landlord/Dashboard";
-import AdminDashboard from "./pages/admin/Dashboard";
-import Login from "./pages/Login";
+import StudentDashboard from "./pages/student/StudentDashboard";
+import LandlordDashboard from "./pages/landlord/landlordDashboard";
+import AdminDashboard from "./pages/admin/adminDashboard";
+import Login from "./pages/auth/Login";
 import Unauthorized from "./pages/Unauthorized";
+import SignupPage from "./pages/auth/SignUp";
 
 export default function App() {
   return (
@@ -13,6 +14,8 @@ export default function App() {
         {/* Public Routes */}
         <Route path="/login" element={<Login />} />
         <Route path="/unauthorized" element={<Unauthorized />} />
+        <Route path="/signup" element={<SignupPage />} />
+
 
         {/* Student Routes */}
         <Route element={<ProtectedRoute allowedRoles={["student"]} />}>

@@ -64,7 +64,7 @@ import {
   // -----------------------------
   // Context
   // -----------------------------
-  const AuthContext = createContext<AuthContextType>({
+  export const AuthContext = createContext<AuthContextType>({
     user: null,
     loading: true,
     logout: () => {},
